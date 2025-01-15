@@ -1,0 +1,329 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Real Estate System</title>
+
+
+<style>
+#searchFormBottom {
+    position: fixed;
+    bottom: 10px;
+    left: 10px;
+    background-color: #C0CED6; /* Background color similar to .form-container */
+    padding: 20px; /* Padding similar to .form-container */
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    max-width: 100px; /* Adjust the maximum width as needed */
+    display: flex;
+    flex-wrap: wrap;
+    align-items: flex-start; /* Adjusted to align items similar to .form-container */
+}
+
+#searchFormBottom input[type="number"],
+#searchFormBottom input[type="text"],
+#searchFormBottom select,
+#searchFormBottom button {
+    margin-bottom: 10px; /* Adjusted margin similar to .form-container */
+    padding: 5px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    box-sizing: border-box;
+    width: calc(100% - 22px); /* Adjusted width similar to .form-container */
+}
+
+#searchFormBottom button {
+    width: 100%;
+    padding: 10px;
+    background-color: #007bff;
+    color: #fff;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+#searchFormBottom button:hover {
+    background-color: #0056b3;
+}
+
+
+body {
+            background-image: url('C:\Users\tusha\Desktop\CS\DBMS\Course project\project\deal.png'); 
+            background-repeat: no-repeat;
+            background-attachment: fixed;
+            background-size: cover; /* Adjusts the size of the background image to cover the entire viewport */
+            font-family: Arial, sans-serif;
+}
+
+.menu a {
+  background-color: #45A3D5; 
+  padding: 8px;
+  margin-top: 30px;
+  display: block;
+  width: 20%;
+  color: black;
+  text-align: center;
+}
+
+
+@media only screen and (max-width: 620px) {
+  /* For mobile phones: */
+  .menu, .main, .right {
+    width: 100%;
+  }
+}
+
+/* Added CSS for flexbox */
+.container {
+  display: flex;
+  flex-wrap: wrap;
+}
+
+.menu {
+  flex-grow: 1;
+}
+
+body {
+  background-image: url('deal.png');
+  background-repeat: no-repeat;
+  background-attachment: fixed;
+  background-size: 100% 100%;
+  font-family: Arial, sans-serif; 
+}
+
+  
+.container {
+  display: flex;
+  align-items: flex-start;
+  justify-content: center;
+  margin-top: 30px;
+}
+
+.form-container {
+  width: 100%;
+  padding: 20px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  background-color: #C0CED6;
+  margin-right: 30px;
+  margin-top: 0; 
+}
+
+h2 {
+  text-align: center;
+}
+
+label {
+  display: block;
+  margin-bottom: 10px;
+  font-weight: bold;
+}
+
+input[type="text"],
+select {
+  width: calc(100% - 22px); 
+  padding: 5px;
+  margin-bottom: 10px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  box-sizing: border-box;
+}
+
+input[type="number"] { /* Add input[type="number"] selector */
+  width: calc(100% - 22px); 
+  padding: 5px;
+  margin-bottom: 10px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  box-sizing: border-box;
+}
+
+button {
+  width: 100%;
+  padding: 10px;
+  background-color: #007bff;
+  color: #fff;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+button:hover {
+  background-color: #0056b3;
+}
+
+/* Added styles for the slide-out navigation */
+        #nav {
+            height: 100%;
+            width: 0;
+            position: fixed;
+            z-index: 1;
+            top: 0;
+            left: 0;
+            background-color: #333;
+            overflow-x: hidden;
+            transition: 0.5s;
+            padding-top: 60px;
+        }
+
+        #nav a {
+            padding: 10px 20px;
+            text-decoration: none;
+            font-size: 20px;
+            color: white;
+            display: block;
+            transition: 0.3s;
+        }
+
+        #nav a:hover {
+            background-color: #ddd;
+            color: black;
+        }
+
+        #nav .closebtn {
+            position: absolute;
+            top: 0;
+            right: 25px;
+            font-size: 36px;
+            margin-left: 50px;
+        }
+
+        #main {
+            transition: margin-left 0.5s;
+            padding: 16px;
+        }
+
+        /* Styles for the small button */
+        #openBtn {
+            position: fixed;
+            bottom: 20px;
+            left: 20px;
+            background-color: #007bff;
+            color: white;
+            border: none;
+            border-radius: 50%;
+            width: 40px;
+            height: 40px;
+            font-size: 20px;
+            cursor: pointer;
+            z-index: 2; /* Ensure button is above other elements */
+        }
+
+
+</style>
+</head>
+
+<body>
+
+
+<div style="background-color: #45A3D5;padding:15px;text-align:center; ">
+  <h1>Real Estate System</h1>
+</div>
+
+<div class="container" style="overflow:auto">
+  <div class="menu">
+    <a href="/home" id="gotohome">Homes</a>
+    <a href="/agents" id="gotoAgents">Agents</a> <!-- Added id for Agents link -->
+    <a href="/locations" id="gotoLocations">Locations</a> <!-- Added id for Locations link -->
+  </div>
+
+
+
+<div class="container">
+  <div class="form-container">
+
+    <h2>Find Your Right Home</h2>
+
+<form id="combinedForm" action="/combinedSearch" method="POST">
+
+  <label for="Location_id">City:</label>
+  <input type="text" id="Location_id" name ="Location_id">
+
+  <label for="Owner_id">Owner:</label>
+  <input type="text" id="Owner_id" name ="Owner_id">
+
+  <label for="name">Required Appliance:</label>
+  <input type="text" id="name" name="name">
+
+  <label for="make">Maker of appliance:</label>
+  <input type="text" id="make" name="make">
+
+  <label for="Agent_id">Agent ID:</label>
+  <input type="text" id="Agent_id" name="Agent_id">
+
+  <label for="salePrice">Selling price:</label>
+  <input type="number" id="salePrice" name="salePrice">
+
+  <label for="maxPrice">Max Price:</label>
+  <input type="number" id="maxPrice" min="0" name="maxPrice">
+
+  <label for="Floors">Floors:</label>
+  <input type="number" id="Floors" name="Floors">
+  
+  <label for="bedRooms">Bedrooms:</label>
+  <input type="number" id="bedRooms" name="bedRooms">
+  
+  <label for="bathRooms">Bathrooms:</label>
+  <input type="number" id="bathRooms" name="bathRooms">
+
+
+<label for="type">Type:</label>
+  <input type="text" id="type" name="type">
+
+
+<label for="soldnumber">Houses sold:</label>
+<select id="soldnumber" name="soldnumber">
+  <option value="" selected disabled>Select an option</option>
+  <option value="1">More than 1 time</option>
+  <option value="2">More than 2 times</option>
+</select>
+
+
+ <button type="submit">Search</button>
+
+</form>
+</div>
+
+
+
+<div class="search-results">
+    <!-- Your search results will appear here -->
+  </div>
+</div>
+
+
+
+ <div id="nav" class="sidenav">
+        <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">&times;</a>
+        <a href="homeform.html">Add New Home</a>
+	<a href="agent.html">Add New Agent</a>
+
+    </div>
+
+    <div id="main">
+        <button id="openBtn" onclick="openNav()">+</button>
+    </div>
+
+
+ 
+       
+    <script>
+        function openNav() {
+            document.getElementById("nav").style.width = "250px"; // Adjust width as needed
+            document.getElementById("main").style.marginLeft = "250px"; // Adjust margin to match nav width
+        }
+
+        function closeNav() {
+            document.getElementById("nav").style.width = "0";
+            document.getElementById("main").style.marginLeft= "0";
+        }
+
+         </script>
+
+
+</body>
+</html>
