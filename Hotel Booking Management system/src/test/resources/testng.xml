@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<suite name="HotelBooking Suite" parallel="tests" thread-count="2">
+    <test name="HotelBooking Tests">
+        <parameter name="browser" value="chrome"/>
+        <classes>
+            <class name="com.hotelbooking.tests.NavbarSeleniumTest"/>
+            <class name="com.hotelbooking.tests.homepagetest"/>
+        </classes>
+    </test>
+</suite>
